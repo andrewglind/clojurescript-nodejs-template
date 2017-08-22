@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.15.2",
+    "jstransformer-coffee-script": "^1.1.0",
+    "pug": "^2.0.0-beta11"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.4.0",
+    "source-map-support": "^0.4.16",
+    "underscore": "^1.8.3",
+    "vinyl-paths": "^2.1.0"
+  }
+}
