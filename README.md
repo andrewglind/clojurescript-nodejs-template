@@ -11,7 +11,7 @@ To build, issue the following commands:
   
   `npm install`
   
-  `gulp` or `gulp <env>`, where env is either **dev** (default) or **prod**
+  `gulp` or `ENV=<env> gulp`, where env is either **dev** (default) or **prod**
   
 To run, issue the following command:
 
