@@ -16,7 +16,6 @@ var build = function(tier) {
     console.error(stderr);
     reject(err);
    } else {
-    console.log(stdout);
     resolve();
    }
   });
