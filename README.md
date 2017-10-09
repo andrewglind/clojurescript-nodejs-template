@@ -3,7 +3,7 @@ Full Stack ClojureScript
 
 This project aims to provide a template for anyone wanting to build a full stack web application using ClojureScript.
 
-You will need to install [NodeJS](http://nodejs.org) and the ClojureScript compiler before using this template, it is available [here](https://github.com/clojure/clojurescript).
+You will need to install [Node.js](http://nodejs.org) and the ClojureScript compiler before using this template, it is available [here](https://github.com/clojure/clojurescript).
 
 Put the *cljs.jar* somewhere on your filesystem (by default I assume it is installed at /usr/local/clojure). If you install in a different location either export CLOJURESCRIPT_HOME or edit **bin/cljsc.sh** to set the new path.
 
