@@ -1,7 +1,7 @@
-Full Stack ClojureScript 
-========================
+Node.js ClojureScript Template
+==============================
 
-This project aims to provide a template for anyone wanting to build a full stack web application using ClojureScript.
+This project aims to provide a template for anyone wanting to build a ClojureScript project on Node.js.
 
 You will need to install [Node.js](http://nodejs.org), and [cURL](https://curl.haxx.se).
 
