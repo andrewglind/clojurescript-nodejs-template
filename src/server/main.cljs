@@ -5,7 +5,6 @@
 (nodejs/enable-util-print!)
 
 (def express (nodejs/require "express"))
-(def pug (nodejs/require "pug"))
 
 (def app (express))
 (.use app (.static express "public"))
@@ -17,7 +16,7 @@
 
 (.get app "/"
  (fn [req res]
-  (.render res "index" #js{})))
+  (.render res "index")))
 
 (.get app "/views/:name"
  (fn [req res]
