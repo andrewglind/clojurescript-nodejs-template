@@ -1,7 +1,7 @@
-ClojureScript Node.js Template
-==============================
+ClojureScript on Node.js 
+========================
 
-This project aims to provide a template for anyone wanting to start writing a ClojureScript project on Node.js.
+This project intends to be a bootstrap for [ClojureScript](http://clojurescript.org) development on Node.js.
 
 You will need to install [Node.js](http://nodejs.org), and [cURL](https://curl.haxx.se).
 
