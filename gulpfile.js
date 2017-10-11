@@ -2,7 +2,6 @@ var fs = require('fs');
 var gulp = require('gulp');
 var del = require('del');
 var exec = require('child_process').exec;
-var _ = require('underscore');
 
 var FILENAME = 'cljs.jar';
 var ENV = process.env.ENV;
@@ -30,10 +29,10 @@ var download = function() {
  });
 }
 
-var env = _.memoize(function() {
+var env = function() {
  // ensure 'prod' or 'dev'
  return (ENV === 'prod') ? ENV : 'dev';
-});
+};
 
 var build = function(tier) {
  return new Promise(function(resolve, reject) {

@@ -9,7 +9,6 @@
     "gulp": "^3.9.1",
     "gulp-cli": "^1.4.0",
     "source-map-support": "^0.4.16",
-    "underscore": "^1.8.3",
     "vinyl-paths": "^2.1.0"
   }
 }
