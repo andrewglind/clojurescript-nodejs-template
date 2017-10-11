@@ -1,4 +1,4 @@
-Node.js ClojureScript Template
+ClojureScript Node.js Template
 ==============================
 
 This project aims to provide a template for anyone wanting to build a ClojureScript project on Node.js.
