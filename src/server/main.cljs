@@ -14,13 +14,17 @@
  (fn [req res]
   (.send res "Hello, Lisp!")))
 
+(.get app "/views/:name"
+ (fn [req res]
+  (.render res (.-name (.-params req)) #js{})))
+
 (.get app "/"
  (fn [req res]
   (.render res "index")))
 
-(.get app "/views/:name"
+(.get app "/*"
  (fn [req res]
-  (.render res (.-name (.-params req)) #js{})))
+  (.redirect res "/")))
 
 (defn -main [& args]
  (let [m (utils/args->map args)
