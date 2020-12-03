@@ -7,18 +7,24 @@ You will need to install [Node.js](http://nodejs.org), and [cURL](https://curl.h
 
 To build, issue the following commands:
  
-  `npm install -g gulp-cli`
- 
-  `npm install`
-  
-  `gulp` or `ENV=<env> gulp`, where env is either **dev** (default) or **prod**
+  `yarn`
+
+  `yarn add -g gulp-cli`
+
+  `yarn build` or `ENV=prod yarn build` to build with optimizations for production use
   
 To run, issue the following command:
 
-  `node server.js`
+  `yarn start` or `node server.js`
   
 By default the application will start on port 3000. You can specify a different port with the following command:
 
   `node server.js port=<port>`
+
+To run as a Docker container, issue the following commands:
+
+  `docker build -t cljs-on-nodejs .`
+
+  `docker run -p 3000:3000 cljs-on-nodejs`
 
 Have fun!

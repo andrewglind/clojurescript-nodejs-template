@@ -1,66 +1,98 @@
-var fs = require('fs');
-var gulp = require('gulp');
-var del = require('del');
-var exec = require('child_process').exec;
+const gulp = require("gulp")
+const { series } = gulp
+const minify = require("gulp-minify")
+const inject = require("gulp-inject-string")
+const rename = require("gulp-rename")
+const fs = require("fs")
+const del = require("del")
+const exec = require("child_process").exec
 
-var FILENAME = 'cljs.jar';
-var ENV = process.env.ENV;
-var VERSION = process.env.VERSION || '1.9.946';
+const FILENAME = "cljs.jar"
+const ENV = process.env.ENV
+const VERSION = process.env.VERSION || "1.10.758"
 
-var download = function() {
- return new Promise(function(resolve, reject) {
-  fs.access(FILENAME, fs.constants.R_OK, function(err) {
-   if(err) { // file doesn't exist
-    console.log('Downloading '+FILENAME+' r'+VERSION+', this may take a few moments...');
-    exec('curl -L https://github.com/clojure/clojurescript/releases/download/r'+VERSION+'/cljs.jar > '+FILENAME, function(err, stdout, stderr) {
-     if(err != null) {
-      console.error(stderr);
-      reject(err);
-     } else {
-      console.log('...done');
-      resolve();
-     }
-    });
-   } else {
-    console.log(FILENAME+' already downloaded');
-    resolve();
-   }
-  });
- });
+const download = () => {
+  return new Promise((resolve, reject) => {
+    fs.access(FILENAME, fs.constants.R_OK, err => {
+      if (err) {
+        // file doesn't exist
+        console.log(
+          `Downloading ${FILENAME} r${VERSION} this may take a few moments...`
+        )
+        exec(
+          `curl -L https://github.com/clojure/clojurescript/releases/download/r${VERSION}/${FILENAME} > ${FILENAME}`,
+          (err, stdout, stderr) => {
+            if (err != null) {
+              console.error(stderr)
+              reject(err)
+            } else {
+              console.log("...done")
+              resolve()
+            }
+          }
+        )
+      } else {
+        console.log(`${FILENAME} already downloaded`)
+        resolve()
+      }
+    })
+  })
 }
 
-var env = function() {
- // ensure 'prod' or 'dev'
- return (ENV === 'prod') ? ENV : 'dev';
-};
-
-var build = function(tier) {
- return new Promise(function(resolve, reject) {
-  exec('java -cp cljs.jar:./src clojure.main build/' + tier + '.' + env() + '.clj', function(err, stdout, stderr) {
-   if(err != null) {
-    console.error(stderr);
-    reject(err);
-   } else {
-    resolve();
-   }
-  });
- })
+const env = () => {
+  // ensure prod or dev
+  return ENV === "prod" ? ENV : "dev"
 }
 
-gulp.task('clean', function() {
- return del(['out', 'server.js', 'public/js/**/*']);
-});
+const build = tier => {
+  return new Promise((resolve, reject) => {
+    exec(
+      `java -cp ${FILENAME}:./src clojure.main build/${tier}.${env()}.clj`,
+      (err, stdout, stderr) => {
+        if (err != null) {
+          console.error(stderr)
+          reject(err)
+        } else {
+          resolve()
+        }
+      }
+    )
+  })
+}
 
-gulp.task('download', ['clean'], function() {
- return download();
-});
+const clean = () => {
+  return del(["out", "server.js", "public/js/**/*", "public/css/style.min.css", "views/index.pug"])
+}
 
-gulp.task('build:client', ['download'], function() {
- return build('client');
-});
+const buildClient = async () => {
+  await build("client")
+  await gulp
+    .src("views/index-template.pug")
+    .pipe(inject.replace("#CLIENT_JS#", "client.js"))
+    .pipe(rename("index.pug"))
+    .pipe(gulp.dest("views"))
+  if (env() === "prod") {
+    await gulp
+      .src(["public/js/client.js"])
+      .pipe(
+        minify({
+          ext: {
+            min: ".min.js"
+          }
+        })
+      )
+      .pipe(gulp.dest("public/js"))
+    return gulp
+      .src("views/index-template.pug")
+      .pipe(inject.replace("#CLIENT_JS#", "client.min.js"))
+      .pipe(rename("index.pug"))
+      .pipe(gulp.dest("views"))
+  }
+  return Promise.resolve()
+}
 
-gulp.task('build:server', ['download'], function() {
- return build('server');
-});
+const buildServer = () => {
+  return build("server")
+}
 
-gulp.task('default', ['clean', 'download', 'build:client', 'build:server']);
+exports.default = series(clean, download, buildClient, buildServer)

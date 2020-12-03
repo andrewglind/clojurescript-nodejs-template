@@ -1,14 +1,23 @@
 {
+  "name": "clojurescript-on-nodejs",
+  "version": "0.2.0",
+  "license": "MIT",
+  "scripts": {
+  "build": "gulp",
+  "start": "node server.js"
+  },
   "dependencies": {
-    "express": "^4.15.2",
-    "jstransformer-coffee-script": "^1.1.0",
-    "pug": "^2.0.0-beta11"
+    "express": "^4.17.1",
+    "jstransformer-coffee-script": "^1.1.1",
+    "pug": "^2.0.4"
   },
   "devDependencies": {
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-cli": "^1.4.0",
-    "source-map-support": "^0.4.16",
-    "vinyl-paths": "^2.1.0"
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-inject-string": "^1.1.2",
+    "gulp-minify": "^3.1.0",
+    "gulp-rename": "^2.0.0",
+    "source-map-support": "^0.5.16",
+    "vinyl-paths": "^3.0.1"
   }
 }

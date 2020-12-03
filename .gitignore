@@ -1,5 +1,6 @@
 node_modules
+cljs.jar
 out
 server.js
-public
-cljs.jar
+public/js
+views/index.pug

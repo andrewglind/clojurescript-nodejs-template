@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+ head
+  title ClojureScript on Node.js
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+  link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto")
+  link(rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css")
+  link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css")
+ body
+  div(ng-view)
+  script(src="//code.jquery.com/jquery-3.3.1.slim.min.js")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js")
+  script(src="//stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js")
+  script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js")
+  script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js")
+  script(src="js/#CLIENT_JS#")
+  script
+   :coffee-script
+    $ ->
+     angular.bootstrap document.body, ["app"]

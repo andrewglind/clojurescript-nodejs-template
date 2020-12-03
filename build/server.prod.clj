@@ -1,10 +1,9 @@
 (require 'cljs.build.api)
 
 (cljs.build.api/build "src/server"
- {:main 'server.main
-  :include '('server.utils)
+ {:pseudo-names true
+  :pretty-print true
   :output-to "server.js"
   :target :nodejs
   :optimizations :simple
-  :language-in :ecmascript5
  })
